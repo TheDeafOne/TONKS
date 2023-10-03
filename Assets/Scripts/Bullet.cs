@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 20;
+    public float _speed = 20;
     public Rigidbody2D _rbody;
+    public int _maxBounceNumber;
+
+    private int _bounceNumber = 0;
     // Update is called once per frame
     void Start()
     {
-        _rbody.velocity = transform.right * speed;
+        _rbody.velocity = transform.right * _speed;
     }
 
     private void Update()
     {
-        _rbody.velocity = _rbody.velocity.normalized * speed;
+        _rbody.velocity = _rbody.velocity.normalized * _speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("Tank"))
+        _bounceNumber++;
+        if (collision.gameObject.tag.Equals("Tank") || _bounceNumber >= _maxBounceNumber)
         {
             Destroy(gameObject);
         }
