@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // serialized inputs
     public float moveSpeed;
     public float rotationSpeed;
-
+    public GameObject explosion;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public string playerString;
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rbody;
     private float moveDirection;
     private float rotationDirection;
+
 
 
     private float lastShot = 0;
@@ -41,7 +42,6 @@ public class PlayerController : MonoBehaviour
 
     public float volumeSetting = (float)0.3;
     public int lives = 3;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.Translate(0f, moveDirection, 0f);
+        _rbody.MovePosition(transform.position + transform.up * moveDirection);
         transform.Rotate(0f, 0f, rotationDirection);
         
     }
@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
 
         //if (Random.value <= 0.1)
         //{
@@ -126,10 +127,10 @@ public class PlayerController : MonoBehaviour
             script.PlayAndDestroy(script._tankExplosion);
 
             //AudioSource.PlayClipAtPoint(_tankExplosion, transform.position, 1);
+            Instantiate(explosion, gameObject.transform.position, transform.rotation = Quaternion.identity);
             Destroy(gameObject);
             PlayerWinController.winner = playerString == "P1" ? "Player 2" : "Player 1";
             SceneManager.LoadScene("EndScreen");
         }
-
     }
 }
