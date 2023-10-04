@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private float moveDirection;
     private float rotationDirection;
 
+
+    private float lastShot = 0;
+
     public AudioSource _audioSource;
     public AudioClip _tankExplosion;
     public AudioClip _tankMove;
@@ -90,8 +93,11 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.name = playerString + "_bullet";
+        if (Time.time - lastShot > 0.3) {
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.name = playerString + "_bullet";
+            lastShot = Time.time;
+        }
         
     }
 
