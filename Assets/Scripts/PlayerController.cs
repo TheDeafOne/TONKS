@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
+
 public class PlayerController : MonoBehaviour
 {
     // serialized inputs
@@ -93,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        if (Time.time - lastShot > 0.3) {
+        if (Time.time - lastShot > 0.5) {
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             bullet.name = playerString + "_bullet";
             lastShot = Time.time;
@@ -113,7 +116,9 @@ public class PlayerController : MonoBehaviour
         //{
         //    _audioSource.PlayOneShot(_tankHit);
         //}
-        lives--;
+        if (collision.gameObject.CompareTag("bullet")) {
+            lives--;
+        }
         if (lives == 0)
         {
             GameObject s = Instantiate(soundManager, gameObject.transform.position, Quaternion.identity);
@@ -121,7 +126,9 @@ public class PlayerController : MonoBehaviour
             script.PlayAndDestroy(script._tankExplosion);
 
             //AudioSource.PlayClipAtPoint(_tankExplosion, transform.position, 1);
-            //Destroy(gameObject);
+            Destroy(gameObject);
+            PlayerWinController.winner = playerString == "P1" ? "Player 2" : "Player 1";
+            SceneManager.LoadScene("EndScreen");
         }
 
     }
