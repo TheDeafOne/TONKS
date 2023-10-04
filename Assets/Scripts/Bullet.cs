@@ -37,28 +37,34 @@ public class Bullet : MonoBehaviour
         _bounceNumber++;
         GameObject s = Instantiate(soundManager, gameObject.transform.position, Quaternion.identity);
         SoundManagerScript script = s.GetComponent<SoundManagerScript>();
-        
-        if (collision.gameObject.tag.Equals("Tank"))
+        if (_bounceNumber >= _maxBounceNumber)
         {
-            if (Random.value <= 0.1)
+            Destroy(gameObject);
+        } else
+        {
+            if (collision.gameObject.tag.Equals("Tank"))
             {
-                script.PlayAndDestroy(script._tankOw);
+                if (Random.value <= 0.1)
+                {
+                    script.PlayAndDestroy(script._tankOw);
 
+                }
+                else
+                {
+                    script.PlayAndDestroy(script._tankHit);
+                }
+                Destroy(gameObject);
             }
             else
             {
-                script.PlayAndDestroy(script._tankHit);
+                script.PlayAndDestroy(script._wallBounce);
             }
-        }else if (_bounceNumber >= _maxBounceNumber){
-            Destroy(gameObject);
-        }
-        else
-        {
-            script.PlayAndDestroy(script._wallBounce);
+            
         }
 
-        
-        
+
+
+
     }
 
 }

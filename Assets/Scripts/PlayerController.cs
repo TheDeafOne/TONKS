@@ -117,20 +117,25 @@ public class PlayerController : MonoBehaviour
         //{
         //    _audioSource.PlayOneShot(_tankHit);
         //}
+        print(lives.ToString());
         if (collision.gameObject.CompareTag("bullet")) {
             lives--;
         }
-        if (lives == 0)
+        if (lives <= 0)
         {
+            
             GameObject s = Instantiate(soundManager, gameObject.transform.position, Quaternion.identity);
             SoundManagerScript script = s.GetComponent<SoundManagerScript>();
-            script.PlayAndDestroy(script._tankExplosion);
+            script.Play(script._tankExplosion);
+            script.LoadLevelAfterDelay(1);
 
             //AudioSource.PlayClipAtPoint(_tankExplosion, transform.position, 1);
             Instantiate(explosion, gameObject.transform.position, transform.rotation = Quaternion.identity);
-            Destroy(gameObject);
             PlayerWinController.winner = playerString == "P1" ? "Player 2" : "Player 1";
-            SceneManager.LoadScene("EndScreen");
+            //gameObject.GetComponent<Renderer>().enabled = false;
+            Destroy(gameObject);
         }
+
+        
     }
 }

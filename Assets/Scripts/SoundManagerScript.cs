@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundManagerScript : MonoBehaviour
@@ -29,6 +30,18 @@ public class SoundManagerScript : MonoBehaviour
     {
         _audioSource.PlayOneShot(sound);
         Destroy(gameObject, sound.length);
-
+    }
+    public void Play(AudioClip sound)
+    {
+        _audioSource.PlayOneShot(sound);
+    }
+    public void LoadLevelAfterDelay(float delay)
+    {
+        Invoke("MyLoadingFunction", delay);
+    }
+    void MyLoadingFunction()
+    {
+        SceneManager.LoadScene("EndScreen");
+        Destroy(gameObject);
     }
 }
