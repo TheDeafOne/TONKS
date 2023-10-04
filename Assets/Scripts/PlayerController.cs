@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public string playerString;
+    public KeyCode shootKey;
 
     private Rigidbody2D _rbody;
     private float moveDirection;
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         AxisControl();
-        if (Input.GetButtonDown(playerString + "_shoot"))
+        if (Input.GetKeyDown(shootKey))
         {
             Shoot();
         }
