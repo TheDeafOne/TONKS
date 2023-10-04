@@ -2,16 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(AudioSource))]
 public class MSManager : MonoBehaviour
 {
 
     public float colThickness = 4f;
     public float zPosition = 0f;
     private Vector2 screenSize;
+    public AudioSource _audioSource;
+    public AudioClip _tankMove;
+    public bool moving;
     // Start is called before the first frame update
     void Start()
     {
         GenerateCollidersAcrossScreen();
+        _audioSource = GetComponent<AudioSource>();
+        
+        //_audioSource.clip = _tankMove;
     }
 
     // Update is called once per frame
@@ -19,7 +27,8 @@ public class MSManager : MonoBehaviour
     {
         
     }
-
+    
+  
     /*
      * adapted from https://forum.unity.com/threads/collision-with-sides-of-screen.228865/
      */
