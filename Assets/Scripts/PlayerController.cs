@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private float moveDirection;
     private float rotationDirection;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.Translate(0f, moveDirection, 0f);
+        _rbody.MovePosition(transform.position + transform.up * moveDirection);
         transform.Rotate(0f, 0f, rotationDirection);
     }
 
@@ -55,7 +56,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collided");
         if (collision.gameObject.tag.Equals("bullet"))
         {
             Instantiate(explosion, gameObject.transform.position, transform.rotation = Quaternion.identity);
