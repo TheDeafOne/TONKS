@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 50
+  explosion: {fileID: 3132019489216927188, guid: ca752bfa3e769aa4a933270da7b5068e, type: 3}
   bulletPrefab: {fileID: 1693656398480089976, guid: bb28422edf212824086a79a5200c56fd, type: 3}
   bulletSpawnPoint: {fileID: 0}
   playerString: 

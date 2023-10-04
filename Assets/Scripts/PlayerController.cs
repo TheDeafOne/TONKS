@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     // serialized inputs
     public float moveSpeed;
     public float rotationSpeed;
-
+    public GameObject explosion;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public string playerString;
@@ -51,5 +51,15 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         bullet.name = playerString + "_bullet";
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("collided");
+        if (collision.gameObject.tag.Equals("bullet"))
+        {
+            Instantiate(explosion, gameObject.transform.position, transform.rotation = Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }

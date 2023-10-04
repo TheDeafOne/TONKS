@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         _rbody.velocity = transform.right * _speed;
+        gameObject.tag = "bullet";
     }
 
     private void Update()
