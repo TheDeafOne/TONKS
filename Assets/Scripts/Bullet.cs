@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     public int _maxBounceNumber;
     public AudioClip _wallBounce;
     public AudioClip _bulletSound;
+    public GameObject bulletHit;
 
     public AudioSource _audioSource;
 
@@ -39,6 +40,9 @@ public class Bullet : MonoBehaviour
         SoundManagerScript script = s.GetComponent<SoundManagerScript>();
         if (_bounceNumber >= _maxBounceNumber)
         {
+            script.PlayAndDestroy(script._wallBounce);
+            Instantiate(bulletHit, gameObject.transform.position, transform.rotation = Quaternion.identity);
+            _rbody.velocity = Vector2.zero;
             Destroy(gameObject);
         } else
         {
@@ -54,8 +58,7 @@ public class Bullet : MonoBehaviour
                     script.PlayAndDestroy(script._tankHit);
                 }
                 Destroy(gameObject);
-            }
-            else
+            } else
             {
                 script.PlayAndDestroy(script._wallBounce);
             }

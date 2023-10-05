@@ -106,6 +106,7 @@ MonoBehaviour:
   _maxBounceNumber: 3
   _wallBounce: {fileID: 8300000, guid: 53249f2dfb21f450a9e2b2f05f437b9e, type: 3}
   _bulletSound: {fileID: 8300000, guid: 6d1442d35fb0d44ed87890d14443b770, type: 3}
+  bulletHit: {fileID: 3898710917207895786, guid: 977497c49a126274b92a0a3f68a0e217, type: 3}
   _audioSource: {fileID: 609054252215435967}
   soundManager: {fileID: 4415687379949168438, guid: 1d41616820bd04dd696e0a6cbc68a61f, type: 3}
 --- !u!58 &6064341925214781097
