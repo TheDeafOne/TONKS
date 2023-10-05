@@ -15,7 +15,6 @@ public class MSManager : MonoBehaviour
     public AudioClip _tankMove;
     public bool moving;
 
-    private int targetAspectRatio = 7;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +22,6 @@ public class MSManager : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         
         //_audioSource.clip = _tankMove;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 

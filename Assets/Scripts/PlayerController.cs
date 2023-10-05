@@ -117,7 +117,6 @@ public class PlayerController : MonoBehaviour
             //AudioSource.PlayClipAtPoint(_tankExplosion, transform.position, 1);
             Instantiate(explosion, gameObject.transform.position, transform.rotation = Quaternion.identity);
             PlayerWinController.winner = playerString == "P1" ? "Player 2" : "Player 1";
-            //gameObject.GetComponent<Renderer>().enabled = false;
             Destroy(gameObject);
         }
 
