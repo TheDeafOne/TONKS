@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126feb4f1a4b81f41b93c7c3831d50b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
-  rotationSpeed: 250
+  moveSpeed: 15
+  rotationSpeed: 200
   explosion: {fileID: 3132019489216927188, guid: ca752bfa3e769aa4a933270da7b5068e, type: 3}
   bulletPrefab: {fileID: 1693656398480089976, guid: bb28422edf212824086a79a5200c56fd, type: 3}
   bulletSpawnPoint: {fileID: 0}

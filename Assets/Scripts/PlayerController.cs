@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
 
     void AxisControl()
     {
-        moveDirection = Input.GetAxis(playerString + "_vertical") * moveSpeed * Time.deltaTime;
-        rotationDirection = Input.GetAxis(playerString + "_horizontal") * -rotationSpeed * Time.deltaTime;
+        moveDirection = Input.GetAxis(playerString + "_vertical");
+        rotationDirection = Input.GetAxis(playerString + "_horizontal");
         if ((moveDirection != 0 || rotationDirection != 0))
         {
             print("partial");
@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        _rbody.MovePosition(transform.position + transform.up * moveDirection);
-        transform.Rotate(0f, 0f, rotationDirection);
+        _rbody.MovePosition(transform.position + transform.up * moveDirection * moveSpeed * Time.deltaTime);
+        transform.Rotate(0f, 0f, rotationDirection * -rotationSpeed * Time.deltaTime);
         
     }
 
@@ -106,18 +106,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-
-        //if (Random.value <= 0.1)
-        //{
-        //    _audioSource.PlayOneShot(_tankOw, (float)0.5);
-
-        //}
-        //else
-        //{
-        //    _audioSource.PlayOneShot(_tankHit);
-        //}
-        print(lives.ToString());
         if (collision.gameObject.CompareTag("bullet")) {
             lives--;
         }

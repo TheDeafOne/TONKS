@@ -14,6 +14,8 @@ public class MSManager : MonoBehaviour
     public AudioSource _audioSource;
     public AudioClip _tankMove;
     public bool moving;
+
+    private int targetAspectRatio = 7;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,6 @@ public class MSManager : MonoBehaviour
         
     }
 
-   
 
     /*
      * adapted from https://forum.unity.com/threads/collision-with-sides-of-screen.228865/
