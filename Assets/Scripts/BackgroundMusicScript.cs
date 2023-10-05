@@ -13,7 +13,18 @@ public class BackgroundMusicScript : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
+        if (PlayerPrefs.HasKey("Sound"))
+        {
+            soundPlaying = PlayerPrefs.GetInt("Sound") == 1;
+            if (soundPlaying)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                audioSource.Stop();
+            }
+        }
     }
     
     // Update is called once per frame
@@ -28,11 +39,13 @@ public class BackgroundMusicScript : MonoBehaviour
         {
             soundOff.GetComponentInChildren<Text>().text = "Sound Off";
             audioSource.Play();
+            PlayerPrefs.SetInt("Sound", 1);
         }
         else
         {
             soundOff.GetComponentInChildren<Text>().text = "Sound On";
             audioSource.Stop();
+            PlayerPrefs.SetInt("Sound", 0);
         }
 
     }
