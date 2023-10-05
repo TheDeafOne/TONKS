@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -14,6 +15,8 @@ public class MSManager : MonoBehaviour
     public AudioSource _audioSource;
     public AudioClip _tankMove;
     public bool moving;
+    public Button soundOff;
+    public bool soundPlaying;
 
     private int targetAspectRatio = 7;
     // Start is called before the first frame update
@@ -31,7 +34,7 @@ public class MSManager : MonoBehaviour
         
     }
 
-
+    
     /*
      * adapted from https://forum.unity.com/threads/collision-with-sides-of-screen.228865/
      */
