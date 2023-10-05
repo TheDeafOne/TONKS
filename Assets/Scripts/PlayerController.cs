@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -34,7 +31,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip _bulletSound;
 
     public bool moveSoundStarted = false;
-    MSManager _managerScript;
     bool isPlaying = false;
 
     public GameObject soundManager;
@@ -47,7 +43,6 @@ public class PlayerController : MonoBehaviour
     {
         _rbody = GetComponent<Rigidbody2D>();
         _audioSource = GetComponent<AudioSource>();
-        _managerScript = FindObjectOfType<MSManager>();
         _audioSource.clip = _tankMove;
     }
 
@@ -108,6 +103,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("bullet")) {
             lives--;
+            Destroy(gameObject.transform.parent.transform.Find("HeartBar").GetChild(0).gameObject);
+
         }
         if (lives <= 0)
         {

@@ -60,6 +60,7 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             } else
             {
+
                 script.PlayAndDestroy(script._wallBounce);
             }
             
