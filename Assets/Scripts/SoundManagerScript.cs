@@ -15,6 +15,8 @@ public class SoundManagerScript : MonoBehaviour
     public AudioClip _wallBounce;
 
     private string level;
+    public GameObject backgroundMusic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,9 @@ public class SoundManagerScript : MonoBehaviour
     }
     public void LoadLevelAfterDelay(float delay)
     {
+        BackgroundMusicScript script = backgroundMusic.GetComponent<BackgroundMusicScript>();
+        StartCoroutine(FadeOut(script.audioSource, 1));
+
         Invoke("MyLoadingFunction", delay);
     }
 
@@ -50,5 +55,19 @@ public class SoundManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene(level);
         Destroy(gameObject);
+    }
+    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
     }
 }

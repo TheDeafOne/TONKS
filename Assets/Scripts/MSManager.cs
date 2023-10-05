@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class MSManager : MonoBehaviour
     public AudioSource _audioSource;
     public AudioClip _tankMove;
     public bool moving;
+    public Button soundOff;
+    public bool soundPlaying;
 
     public Text p1ScoreText;
     public Text p2ScoreText;
@@ -37,7 +40,7 @@ public class MSManager : MonoBehaviour
         }
     }
 
-
+    
     /*
      * adapted from https://forum.unity.com/threads/collision-with-sides-of-screen.228865/
      */

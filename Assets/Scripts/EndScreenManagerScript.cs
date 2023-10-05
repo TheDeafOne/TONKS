@@ -9,7 +9,7 @@ public class EndScreenManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        winnerText.text = PlayerWinController.winner + " wins the game!";
+        winnerText.text = PlayerWinController.winner + " wins!";
     }
 
     // Update is called once per frame
