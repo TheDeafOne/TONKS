@@ -14,6 +14,7 @@ public class SoundManagerScript : MonoBehaviour
     public AudioClip _bulletSound;
     public AudioClip _wallBounce;
 
+    private string level;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +40,15 @@ public class SoundManagerScript : MonoBehaviour
     {
         Invoke("MyLoadingFunction", delay);
     }
+
+    public void SetLevelToLoad(string level)
+    {
+        this.level = level;
+    }
+
     void MyLoadingFunction()
     {
-        SceneManager.LoadScene("EndScreen");
+        SceneManager.LoadScene(level);
         Destroy(gameObject);
     }
 }

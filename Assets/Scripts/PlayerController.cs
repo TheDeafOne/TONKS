@@ -38,12 +38,15 @@ public class PlayerController : MonoBehaviour
 
     public float volumeSetting = (float)0.3;
     public int lives = 3;
+    
+    private MSManager _msManager;
     // Start is called before the first frame update
     void Start()
     {
         _rbody = GetComponent<Rigidbody2D>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = _tankMove;
+        _msManager = FindObjectOfType<MSManager>();
     }
 
     // Update is called once per frame
@@ -63,7 +66,6 @@ public class PlayerController : MonoBehaviour
         rotationDirection = Input.GetAxis(playerString + "_horizontal");
         if ((moveDirection != 0 || rotationDirection != 0))
         {
-            print("partial");
             if (!isPlaying)
             {
                 _audioSource.Stop();
@@ -72,7 +74,6 @@ public class PlayerController : MonoBehaviour
                 _audioSource.volume = 0.2f;
                 _audioSource.Play();
                 isPlaying = true;
-                print("full");
             }
         }
         else
@@ -108,18 +109,24 @@ public class PlayerController : MonoBehaviour
         }
         if (lives <= 0)
         {
-            
             GameObject s = Instantiate(soundManager, gameObject.transform.position, Quaternion.identity);
             SoundManagerScript script = s.GetComponent<SoundManagerScript>();
             script.Play(script._tankExplosion);
-            script.LoadLevelAfterDelay(1);
+            if (_msManager.ManageWin(playerString))
+            {
+                script.SetLevelToLoad("SampleScene");
+            } else
+            {
+                PlayerWinController.winner = playerString == "P1" ? "Player 2" : "Player 1";
 
-            //AudioSource.PlayClipAtPoint(_tankExplosion, transform.position, 1);
+                script.SetLevelToLoad("EndScreen");
+            }
+            script.LoadLevelAfterDelay(1);
             Instantiate(explosion, gameObject.transform.position, transform.rotation = Quaternion.identity);
-            PlayerWinController.winner = playerString == "P1" ? "Player 2" : "Player 1";
             Destroy(gameObject);
+            
         }
 
-        
+
     }
 }

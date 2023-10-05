@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class MSManager : MonoBehaviour
@@ -15,13 +15,26 @@ public class MSManager : MonoBehaviour
     public AudioClip _tankMove;
     public bool moving;
 
+    public Text p1ScoreText;
+    public Text p2ScoreText;
+    private int p1Score;
+    private int p2Score;
     // Start is called before the first frame update
     void Start()
     {
+        p1Score = p2Score = 0;
         GenerateCollidersAcrossScreen();
         _audioSource = GetComponent<AudioSource>();
-        
-        //_audioSource.clip = _tankMove;
+        if (PlayerPrefs.HasKey("P1Score"))
+        {
+            p1Score = PlayerPrefs.GetInt("P1Score");
+            p1ScoreText.text = "Player 1 Score: " + p1Score.ToString();
+        }
+        if (PlayerPrefs.HasKey("P2Score"))
+        {
+            p2Score = PlayerPrefs.GetInt("P2Score");
+            p2ScoreText.text = "Player 2 Score: " + p2Score.ToString();
+        }
     }
 
 
@@ -61,6 +74,30 @@ public class MSManager : MonoBehaviour
         colliders["Top"].position = new Vector3(cameraPos.x, cameraPos.y + screenSize.y + (colliders["Top"].localScale.y * 0.5f), zPosition);
         colliders["Bottom"].position = new Vector3(cameraPos.x, cameraPos.y - screenSize.y - (colliders["Bottom"].localScale.y * 0.5f), zPosition);
 
+    }
+
+    public bool ManageWin(string player)
+    {
+        if (player.Equals("P1"))
+        {
+            p2Score++;
+            p2ScoreText.text = "Player 2 Score: " + p2Score.ToString();
+            PlayerPrefs.SetInt("P2Score", p2Score);
+
+        }
+        else
+        {
+            p1Score++;
+            p1ScoreText.text = "Player 1 Score: ";// + p1Score.ToString();
+            PlayerPrefs.SetInt("P1Score", p1Score);
+        }
+        if (p1Score < 5 && p2Score < 5)
+        {
+            return true;
+        }
+        PlayerPrefs.SetInt("P1Score", 0);
+        PlayerPrefs.SetInt("P2Score", 0);
+        return false;
     }
 }
 

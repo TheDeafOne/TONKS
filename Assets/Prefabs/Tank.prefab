@@ -189,6 +189,7 @@ MonoBehaviour:
   soundManager: {fileID: 4415687379949168438, guid: 1d41616820bd04dd696e0a6cbc68a61f, type: 3}
   volumeSetting: 0.3
   lives: 3
+  mainSceneManager: {fileID: 0}
 --- !u!82 &3032521876331336130
 AudioSource:
   m_ObjectHideFlags: 0
