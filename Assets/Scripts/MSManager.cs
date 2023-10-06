@@ -15,14 +15,17 @@ public class MSManager : MonoBehaviour
     public AudioSource _audioSource;
     public AudioClip _tankMove;
     public bool moving;
-    public Button soundOff;
-    public bool soundPlaying;
+
 
     public Text p1ScoreText;
     public Text p2ScoreText;
     private int p1Score;
     private int p2Score;
     // Start is called before the first frame update
+    public void PrintWorking()
+    {
+        print("working");
+    }
     void Start()
     {
         p1Score = p2Score = 0;

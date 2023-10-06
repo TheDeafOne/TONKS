@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BackgroundMusicScript : MonoBehaviour
 {
     public Button soundOff;
-    public bool soundPlaying;
+    public bool soundPlaying = true;
     public AudioSource audioSource;
 
 
@@ -25,6 +25,13 @@ public class BackgroundMusicScript : MonoBehaviour
                 audioSource.Stop();
             }
         }
+        if (soundPlaying)
+        {
+            soundOff.GetComponentInChildren<Text>().text = "Sound Off";
+        } else
+        {
+            soundOff.GetComponentInChildren<Text>().text = "Sound On";
+        }
     }
     
     // Update is called once per frame
@@ -34,6 +41,7 @@ public class BackgroundMusicScript : MonoBehaviour
     }
     public void SoundOff()
     {
+        print("WORKING");
         soundPlaying = !soundPlaying;
         if (soundPlaying)
         {
@@ -44,7 +52,7 @@ public class BackgroundMusicScript : MonoBehaviour
         else
         {
             soundOff.GetComponentInChildren<Text>().text = "Sound On";
-            audioSource.Stop();
+            audioSource.Pause();
             PlayerPrefs.SetInt("Sound", 0);
         }
 
