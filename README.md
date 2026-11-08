@@ -2,9 +2,9 @@
 
 TONKS is a local two-player tank game built in Unity. Both players share a keyboard and an arena, driving, turning, and firing at each other. Each tank has three lives, and the first player to win five rounds wins the match.
 
-![TONKS controls and round structure, illustrated with the original tank sprites](docs/tonks-overview.png)
+![TONKS controls and round structure, illustrated with the game's tank sprites](docs/tonks-overview.png)
 
-*A documentation illustration using the project's tank sprites, not a gameplay screenshot.*
+*Controls and round structure, illustrated with the game's tank sprites.*
 
 ## Motivation
 
